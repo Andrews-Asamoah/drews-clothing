@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { auth } from "../../firebase/firebase.utils";
+
 import { ReactComponent as Logo } from "../../assets/crown.svg"; //this how we import svgs in react
 
 import "./header.styles.scss";
 
-const Header = () => (
+const Header = ({ currentUser }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -17,9 +19,15 @@ const Header = () => (
       <Link className="option" to="/shop">
         CONTACT
       </Link>
-      <Link className="option" to="/shop">
-        SIGN IN
-      </Link>
+      {currentUser ? ( //using a ternarry operator to conditional render whether if its true or unlink if false
+        <div className="option" onClick={() => auth.signOut()}>
+          SIGN OUT
+        </div>
+      ) : (
+        <Link className="option" to="/signin">
+          SIGN IN
+        </Link>
+      )}
     </div>
   </div>
 );

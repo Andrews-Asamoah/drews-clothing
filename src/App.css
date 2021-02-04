@@ -7,3 +7,8 @@ a {
   text-decoration: none;
   color: black;
 }
+
+/* for every element let box sizing be a border-box */
+* {
+  box-sizing: border-box;
+}
